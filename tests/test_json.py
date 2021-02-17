@@ -171,3 +171,15 @@ def test_json_prepare_device_data_full_default(nm_initialized, sensor_data):
     assert response == {"mac": nm.via_json.mac, "name": nm.via_json.name, "owner": nm.via_json.owner,
                         "lat": nm.via_json.lat, "lon": nm.via_json.lon, "alt": nm.via_json.alt,
                         "sensors": [sdata]}
+
+
+def test_json_send_full_data(nm_initialized, sensor_data):
+    nm = nm_initialized
+    sensors = sensor_data()
+    response = nm.via_json.send_full_data(sensors=sensors)
+    assert_that(
+        (
+            response['errno'],
+            response['error']
+        ), contains(200, 'OK')
+    )
