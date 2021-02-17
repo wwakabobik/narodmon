@@ -2,7 +2,7 @@
 
 ## Requirements
 
-You need to register in https://narodmon.ru/
+You need to register in https://narodmon.ru/. 
 If you plan to use /api endpoint, you need to get api key also.
 Narodmon contains two endpoints - json and api. This wrapper provides wrap for both of them.
 
@@ -55,14 +55,14 @@ Secondly, you can pack multiple sensors data for each device. To achieve it, use
     
 When you prepare all sensor data, you can send data for whole device:
 
-    response = nm.via_json.send_full_data_json(sensors=sensors)   # full data send (only for first call)
-    response = nm.via_json.send_short_data_json(sensors=sensors)  # short sensors data send (without device data)
+    response = nm.via_json.send_full_data(sensors=sensors)   # full data send (only for first call)
+    response = nm.via_json.send_short_data(sensors=sensors)  # short sensors data send (without device data)
     
 Alternatively, you can prepare data for several devices and send it bulk:
 
     
     device1 = nm.via_json.prepare_device_data_full(sensors=sensors1, mac=mac1, name=name1, 
-                                                   owner=owner1, lat=rlat, lon=lon1, alt=alt1)
+                                                   owner=owner1, lat=lat1, lon=lon1, alt=alt1)
     device2 = nm.via_json.prepare_device_data_short(sensors=sensors2, mac=mac2)
     devices = [device1, device2]
     response = nm.via_json.send_bulk_data(data=devices)
