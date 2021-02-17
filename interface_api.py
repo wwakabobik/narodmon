@@ -952,3 +952,4 @@ class InterfaceAPI:
         :return: none
         """
         self.uuid = generate_hash(self.uuid)
+        return self.uuid

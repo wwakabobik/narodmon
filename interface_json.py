@@ -59,7 +59,7 @@ class InterfaceJSON:
         """
         self.alt = alt
 
-    def send_several_data_json(self, data):
+    def send_bulk_data(self, data):
         """
         Send data for several devices
 
@@ -75,7 +75,7 @@ class InterfaceJSON:
             stderr.write("Narodmon sensors data is wrong!")
             return ''
 
-    def send_full_data_json(self, sensors, mac=None, name=None, owner=None, lat=None, lon=None, alt=None):
+    def send_full_data(self, sensors, mac=None, name=None, owner=None, lat=None, lon=None, alt=None):
         """
         Send long data (sensors) from device to server
 
@@ -94,7 +94,7 @@ class InterfaceJSON:
         status_decode(response)
         return response.json()
 
-    def send_short_data_json(self, sensors, mac=None):
+    def send_short_data(self, sensors, mac=None):
         """
         Send short data (sensors) from device to server
 
