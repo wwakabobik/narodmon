@@ -3,13 +3,14 @@ from sys import stderr
 import requests
 
 from narodmon.tools import status_decode
+from narodmon.settings import BASE_API_URL
 
 
 class InterfaceJSON:
     def __init__(self, mac=None, name=None, owner=None, lat=None, lon=None, alt=None):
         self.endpoint = f'{BASE_API_URL}/json'
         self.headers = {'Content-type': 'application/x-www-form-urlencoded'}
-        self.name = name,
+        self.name = name
         self.mac = mac
         self.owner = owner
         self.lat = lat
@@ -90,7 +91,7 @@ class InterfaceJSON:
         payload = {"devices": [self.prepare_device_data_full(sensors=sensors, mac=mac, name=name, owner=owner,
                                                              lat=lat, lon=lon, alt=alt)]}
         response = requests.post(self.endpoint, json=payload, headers=self.headers)
-        self.status_decode(response)
+        status_decode(response)
         return response.json()
 
     def send_short_data_json(self, sensors, mac=None):
@@ -142,7 +143,7 @@ class InterfaceJSON:
 
         return {"mac": mac, "name": name, "owner": owner, "lat": lat, "lon": lon, "alt": alt, "sensors": sensors}
 
-    def prepare_data_short(self, sensors, mac=None):
+    def prepare_device_data_short(self, sensors, mac=None):
         """
         Prepare data dict for device (short (update) format)
 
@@ -179,7 +180,7 @@ class InterfaceJSON:
         if name:
             answer.update({"name": name})
         if unit:
-            answer.update({"unit": "C"})
+            answer.update({"unit": unit})
         if utc_time:
             answer.update({"time": utc_time})
         return answer

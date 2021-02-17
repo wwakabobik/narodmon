@@ -1,6 +1,7 @@
 import requests
 
 from narodmon.tools import status_decode, generate_hash
+from narodmon.settings import BASE_API_URL
 
 
 class InterfaceAPI:
