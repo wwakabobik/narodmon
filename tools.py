@@ -3,7 +3,7 @@ import hashlib
 
 
 def status_decode(response):
-    if response.status_code != 200:
+    if response.status_code != 200 or response.status_code != 201 or response.status_code != 202:
         if response.status_code == 429:
             stderr.write(f"Server response is {response.status_code} == Too fast (more than 1 request per minute)")
         elif response.status_code == 400:
