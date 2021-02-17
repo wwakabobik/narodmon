@@ -102,7 +102,7 @@ class InterfaceJSON:
         :param mac: (optional) mac address of device
         :return: response JSON
         """
-        payload = {"devices": [self.prepare_data_short(sensors, mac=mac)]}
+        payload = {"devices": [self.prepare_device_data_short(sensors, mac=mac)]}
         response = requests.post(self.endpoint, json=payload, headers=self.headers)
         status_decode(response)
         return response.json()

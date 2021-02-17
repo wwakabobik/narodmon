@@ -137,15 +137,15 @@ def test_json_prepare_data_short_with_mac(nm_initialized, sensor_data):
     nm = nm_initialized
     sdata = sensor_data()
     rmac = random_string(random.randint(1, 20))
-    response = nm.prepare_data_short(sensors=sdata, mac=rmac)
-    assert response == {"devices": [{"mac": rmac, "sensors": sdata}]}
+    response = nm.via_json.prepare_device_data_short(sensors=sdata, mac=rmac)
+    assert response == {"devices": [{"mac": rmac, "sensors": [sdata]}]}
 
 
 def test_json_prepare_data_short_without_mac(nm_initialized, sensor_data):
     nm = nm_initialized
     sdata = sensor_data()
-    response = nm.via_json.prepare_data_short(sensors=sdata)
-    assert response == {"devices": [{"mac": nm.via_json.mac, "sensors": sdata}]}
+    response = nm.via_json.prepare_device_data_short(sensors=sdata)
+    assert response == {"devices": [{"mac": nm.via_json.mac, "sensors": [sdata]}]}
 
 
 def test_json_prepare_device_data_full_filled(nm_initialized, sensor_data):
@@ -161,7 +161,7 @@ def test_json_prepare_device_data_full_filled(nm_initialized, sensor_data):
     response = nm.via_json.prepare_device_data_full(sensors=sdata, mac=rmac, name=rname, owner=rowner, lat=rlat,
                                                     lon=rlon, alt=ralt)
     assert response == {"mac": rmac, "name": rname, "owner": rowner, "lat": rlat, "lon": rlon, "alt": ralt,
-                        "sensors": sdata}
+                        "sensors": [sdata]}
 
 
 def test_json_prepare_device_data_full_default(nm_initialized, sensor_data):
@@ -170,22 +170,4 @@ def test_json_prepare_device_data_full_default(nm_initialized, sensor_data):
     response = nm.via_json.prepare_device_data_full(sensors=sdata)
     assert response == {"mac": nm.via_json.mac, "name": nm.via_json.name, "owner": nm.via_json.owner,
                         "lat": nm.via_json.lat, "lon": nm.via_json.lon, "alt": nm.via_json.alt,
-                        "sensors": sdata}
-
-
-
-latitude = 55.4005523
-longitude = 37.8104
-altitude = 165
-
-name = "wwakabobik_ws"
-owner = "Iliya Vereshchagin"
-mac = "b8:27:eb:06:17:26"
-
-nm = Narodmon(mac=mac, name=name, owner=owner, lat=latitude, lon=longitude, alt=altitude)
-sdata = nm.via_json.prepare_sensor_data(id_in="TEMPC", value=-5.78)
-print(sdata)
-ddata = nm.via_json.prepare_device_data_full(sensors=sdata)
-print(ddata)
-response = nm.via_json.send_full_data_json(sensors=sdata)
-print(response)
+                        "sensors": [sdata]}
