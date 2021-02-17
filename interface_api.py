@@ -1,6 +1,6 @@
 import requests
 
-from narodmon.tools import status_decode
+from narodmon.tools import status_decode, generate_hash
 
 
 class InterfaceAPI:
@@ -270,3 +270,11 @@ class InterfaceAPI:
         if topic:
             payload.update({"topic": topic})
         return self.send_post_request(payload)
+
+    def generate_hash_password(self, password, uuid=None):
+        if not uuid:
+            uuid = self.uuid
+        return f'{generate_hash(uuid)}{generate_hash(password)}'
+
+    def encrypt_uuid(self):
+        self.uuid = generate_hash(self.uuid)
