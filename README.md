@@ -6,6 +6,8 @@ You need to register in https://narodmon.ru/.
 If you plan to use /api endpoint, you need to get api key also.
 Narodmon contains two endpoints - json and api. This wrapper provides wrap for both of them.
 
+![NarodMon sensor data](https://raw.githubusercontent.com/wwakabobik/narodmon/master/narodmon_report.png)
+
 
 ## Usage
 
