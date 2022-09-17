@@ -1,5 +1,7 @@
 **Simple python wrapper around narodmon's APIs**
 
+pypi package can be found [here](https://pypi.org/project/narodmon-python-api/) 
+
 ## Requirements
 
 You need to register in https://narodmon.ru/. 
